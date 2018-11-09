@@ -1,0 +1,27 @@
+{% extends "base_generic.html" %}
+
+{% block title %}Packing List{% endblock %}
+
+{% block content %}
+<main id="packing-list">
+    
+    <h2>Packing List</h2>
+    
+    {% for bidder in bidders %}
+    {% if bidder.item_set.all %}
+    <section>
+    <h3 {% if bidder.payment_complete %}class="paid"{% endif %}>{{ bidder.id }}</h3>
+    <p>{{ bidder }}</p>
+    <ul>
+        {% for item in bidder.item_set.all %}
+        <li><p><span>{{ item.id }}</span> - {{ item }}</p></li>
+        {% endfor %}
+    </ul>
+    </section>
+    {% endif %}
+    {% endfor %}
+    
+    <p id="return-link"><a href="{% url 'summary' %}" class="button"><i class="fas fa-arrow-left"></i> Return to list</a></p>
+    
+</main>
+{% endblock %}

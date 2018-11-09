@@ -1,0 +1,83 @@
+{% extends "base_generic.html" %}
+
+{% block title %} {{ bidder }} {% endblock %}
+
+{% block content %}
+<main id="invoice">
+
+<h2>{{ bidder }}</h2>
+
+{% if bidder.payment_complete %}
+    <h3 class="paid">{{ bidder.id }}</h3>
+{% else %}
+    <h3>{{ bidder.id }}</h3>
+{% endif %}
+    
+<p>Bidder Number</p>
+
+{% if bidder.amount_owed == 0 %}
+<p>You have no winning bids.</p>
+
+{% else %}
+        <table>
+        <tbody>
+            <tr>
+                <th>#</th>
+                <th>Item</th>
+                <th>Bid</th>
+            </tr>
+        
+        {% for item in bidder.item_set.all %}
+        <tr>
+            <td>{{item.id}}</td>
+            <td>{{item.name}}</td>
+            <td>${{item.bid_amount}}</td>
+        </tr>
+        {% endfor %}
+        
+        <tr class="total-bid">
+            <td colspan="2">Total bid:</td>
+            <td>${{bidder.amount_owed}}</td>
+        </tr>
+            
+        </tbody>    
+        </table>
+    
+    {% if bidder.payment_complete %}
+        <p>Your payment has been received. Thank you for your support!</p>
+        <p class="txn_id">Transaction ID: {{bidder.payment_txn}}</p>
+        
+        <ul>
+            <li>
+                <form action="" method="post">
+                {% csrf_token %}
+                {{ email_form.as_table }}
+                <input type="submit" value="Email Invoice">
+                </form>
+            </li>
+        
+            <li><a href="{{ bidder.get_print_url }}" class="button" target="_blank">Print Invoice</a></li>
+    </ul>
+        {% if email_sent %}
+            <p>Email sent!</p>
+        {% endif %}
+        
+    {% else %}
+    <ul>
+        <li>
+            <form action="{{bidder.id}}/payment-received" method="post">
+            {% csrf_token %}
+            <input type="submit" value="Mark as Paid">
+            </form>
+        </li>
+    </ul>
+
+    {% endif %}
+
+{% endif %}
+
+<p id="return-link"><a href="{% url 'summary' %}" class="button"><i class="fas fa-arrow-left"></i> Return to list</a></p>
+    
+</main>
+
+{% endblock %}

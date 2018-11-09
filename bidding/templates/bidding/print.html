@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>{{ bidder }} Invoice</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'styles/styles.css' %}">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans|Roboto" rel="stylesheet"> 
+</head>
+<body id="print-invoice">
+
+{% if bidder.payment_complete %}
+    
+    <img src="{% static 'images/BPS-logo-large.png' %}" width=300px;>
+    <h1>Brown Play School</h1>
+    <h2>Fall Fete {{ year }}</h2>
+    
+    <p class="date">{{ date }}</p>
+    <p class="name">{{ bidder }}</p>
+    
+    <p>Thank you for your support in this year's Brown Play School fundraising auction. The invoice below lists the items you purchased from the auction.</p>
+    
+        <table>
+        <tbody>
+            <tr>
+                <th>Item</th>
+                <th>Price</th>
+            </tr>
+        
+        {% for item in bidder.item_set.all %}
+        <tr>
+            <td>{{item.name}}</td>
+            <td>${{item.bid_amount}}</td>
+        </tr>
+        {% endfor %}
+        
+        <tr class="total-bid">
+            <td>Total bid:</td>
+            <td>${{bidder.amount_owed}}</td>
+        </tr>
+            
+        </tbody>    
+        </table>
+    
+
+</body>
+    
+    <script>window.print();</script>
+    
+{% else %}
+    
+    <p>Payment for this bidder has not been received.</p>
+    
+    </body>
+
+{% endif %}
+    
+</html>

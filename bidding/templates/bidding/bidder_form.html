@@ -1,0 +1,24 @@
+{% extends "base_generic.html" %}
+
+{% load static %}
+
+{% block content %}
+
+<main id="edit_bidder">
+
+<h2>Edit Bidder</h2>
+
+<form action="" method="post">
+    {% csrf_token %}
+    <ul>
+    {{ form.as_ul }}
+    </ul>
+    <input type="submit" value="Submit" id="submit">
+    <a href="{% url 'summary' %}" class="button cancel">Cancel</a>
+</form>
+    
+</main>
+
+<script src="{% static 'scripts/bidder-form-validator.js' %}"></script>
+
+{% endblock %}

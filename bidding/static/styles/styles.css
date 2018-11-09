@@ -1,0 +1,334 @@
+html {
+    font-size: 16pt;
+    font-family: 'Open Sans', sans-serif;
+    color: rgb(50,50,50);
+}
+
+a {
+    text-decoration: none;
+    color: rgb(0,0,238);
+}
+
+a:visited {
+    color: rgb(0,0,238);
+}
+
+main {
+    position: relative;
+    margin: 0 3rem;
+}
+
+.button {
+    padding: 0.5rem;
+    margin: 0.5 rem;
+    border-radius: 10px;
+    border: solid 1px rgb(34, 28, 204);
+    text-decoration: none;
+    color: rgb(34, 28, 204);
+    transition: 0.2s;
+}
+
+.button a {
+    color: rgb(34, 28, 204);
+}
+
+.button:hover {
+    background-color: cornflowerblue;
+    color: white;
+}
+
+.cancel {
+    border-color: rgb(150,150,150);
+    color: rgb(150,150,150);
+}
+
+.cancel:visited {
+    color: rgb(150,150,150);
+}
+
+.cancel:hover {
+    background-color: rgba(220,220,220,0.5);
+    color: rgb(150,150,150);
+}
+
+input[type="submit"] {
+    padding: 0.5rem;
+    margin: 0.5 rem;
+    border-radius: 10px;
+    border: solid 1px rgb(34, 28, 204);
+    text-decoration: none;
+    color: rgb(34, 28, 204);
+    transition: 0.2s;
+    background-color: white;
+    font-size: 1rem;
+    font-family: 'Open Sans', sans-serif;
+}
+
+input[type="submit"]:hover {
+    cursor: pointer;
+    background-color: cornflowerblue;
+    color: white;
+}
+
+form input {
+    font-size: 1rem;
+}
+
+header {
+    font-family: 'Roboto', sans-serif;
+    background-color: rgb(34, 28, 204);
+    color: white;
+    padding: 0.1rem 1rem;
+}
+
+header ul {
+    list-style: none;
+    float: right;
+}
+
+header ul li {
+    display: inline-block;
+    margin: 1rem;
+}
+
+header ul li .button {
+    color: white;
+    border-color: white;
+}
+
+header ul li .username {
+    font-style: italic;
+    font-weight: bolder;
+}
+
+header a {
+    color: white;
+}
+
+header a:visited {
+    color: white;
+}
+
+h1 {
+    font-size: 2rem;
+    margin: 0;
+}
+
+table {
+    width: 100%;
+    text-align: center;
+    border-collapse: collapse;
+}
+
+table tr {
+    background-color: white;
+    transition: 0.1s;
+}
+
+table tr:hover {
+    background-color: rgba(34,28,204,0.1);
+}
+
+table tr:first-of-type:hover {
+    background-color: white;
+}
+
+table td {
+    border: solid 1px rgb(150,150,150);
+    padding: 0.5rem;
+}
+
+table th i {
+    margin-left: 1rem;
+}
+
+#summary ul {
+    list-style: none;
+    text-align: right;
+}
+
+#summary li {
+    display: inline-block;
+    padding: 0.5rem 0;
+    /*text-align: right;*/
+}
+
+#summary .paid {
+    color: green;
+}
+
+#summary .notpaid {
+    color: red;
+}
+
+#summary p:last-of-type {
+    text-align: center;
+    font-size: 2rem;
+    color: white;
+    padding: 1rem;
+    border-radius: 1rem;
+    background-color: green;
+}
+
+#invoice {
+    text-align: center;
+}
+
+h3 {
+    text-align: center;
+    display: block;
+    padding: 2rem;
+    margin: 0 auto;
+    font-size: 2rem;
+    color: rgb(100,100,100);
+    border: solid 1px rgb(100,100,100);
+    border-radius: 4rem;
+    background-color: rgb(220,220,220);
+    width: 4rem;
+}
+
+h3.paid {
+    color: green;
+    border-color: green;
+    background-color: palegreen;
+}
+
+#invoice h3 + p {
+    font-size: 0.7rem;
+    margin-top: 0;
+    margin-bottom: 1rem;
+}
+
+#invoice table tr:last-of-type {
+    font-weight: bold;
+    background-color: rgb(220,220,220);
+}
+
+#invoice table tr:last-of-type td:first-of-type {
+    text-align: right;
+}
+
+#invoice table + p {
+    color: green;
+}
+
+#invoice .txn_id {
+    font-size: 0.7rem;
+}
+
+#invoice ul {
+    list-style: none;
+}
+
+#invoice ul li {
+    display: inline-block;
+    margin: 0 1rem;
+}
+
+#invoice #id_email {
+    font-size: 1rem;
+    margin-left: 10px;
+}
+
+#invoice p:last-of-type {
+    text-align: left;
+}
+
+#edit_bidder form ul {
+    list-style: none;
+    padding: 0;
+}
+
+#edit_bidder form li {
+    padding: 0.5rem;
+}
+
+#edit_bidder form li:last-of-type {
+    margin-bottom: 0.5rem;
+}
+
+#edit_bidder #submit[disabled] {
+    border: none;
+    background-color: rgb(240,240,240);
+    color: white;
+}
+
+#edit_bidder #submit[disabled]:hover {
+    cursor: default;
+}
+
+#edit_bidder #id_email_address.missing-value {
+    background-color: rgba(200,0,0,0.4);
+}
+
+#edit_bidder #id_email_address {
+    background-color: none;
+}
+
+#print-invoice {
+    margin: 1rem 3rem;
+}
+
+#print-invoice img, #print-invoice h1, #print-invoice h2 {
+    display: block;
+    margin: 0 auto;
+    text-align: center;
+}
+
+#print-invoice .name {
+    margin-top: 2rem;
+    font-weight: bold;
+}
+
+#print-invoice .date {
+    float: right;
+}
+
+#print-invoice table tr:last-of-type {
+    font-weight: bold;
+    background-color: rgb(220,220,220);
+}
+
+#print-invoice table tr:last-of-type td {
+    border-top-width: 4px;
+}
+
+#print-invoice table tr:last-of-type td:first-of-type {
+    text-align: right;
+}
+
+#packing-list h2 {
+    text-align: center;
+}
+
+#packing-list section {
+    padding: 2rem 0 2rem 10rem;
+    padding-bottom: 2rem;
+    border-bottom: solid 2px;
+    min-height: 175px;
+}
+
+#packing-list section h3 {
+    margin: 1rem 0 0 0;
+    position: absolute;
+    left: 1rem;
+    
+}
+
+#packing-list section > p {
+    font-weight: bold;
+}
+
+#packing-list section ul {
+    list-style: none;
+}
+
+#packing-list section li span {
+    font-weight: bold;
+}
+
+#return-link {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
