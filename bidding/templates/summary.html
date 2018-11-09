@@ -46,9 +46,9 @@
     {% endfor %}
 </tbody>
 </table>
-    
+    {% if total %}
     <p>Total Auction Revenue: ${{ total }}</p>
-    
+    {% endif %}
 </main>
 
 {% endblock %}
