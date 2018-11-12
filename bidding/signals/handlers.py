@@ -1,10 +1,10 @@
-from django.dispatch import receiver
 from paypal.standard.ipn.signals import valid_ipn_received, invalid_ipn_received
 from paypal.standard.models import ST_PP_COMPLETED
+from django.dispatch import receiver
 from bidding.models import Bidder
 
 @receiver(valid_ipn_received)
-def show_me_the_money(sender, **kwargs):
+def update_payment_status(sender, **kwargs):
     """Do things here upon a valid IPN message received"""
     
     payment_proc_debug('none yet','The receiver is active. payment_status:' + sender.payment_status)
