@@ -69,3 +69,20 @@ def email_paypal_invoice(bidder):
     response = sg.client.mail.send.post(request_body=mail.get())
     
     return response
+
+def payment_proc_debug(bidder,message):
+    mail = Mail()
+    mail.from_email = Email('Brown Play School <claudine@brownplayschool.org>')
+    mail.template_id = 'd-ad6d3b4eac8a4dffb4fb3fbb5e206355'
+    p = Personalization()
+    p.add_to(Email('mjsorrenti@gmail.com'))
+    p.dynamic_template_data = {
+        'bidder': bidder,
+        'message': message,
+    }
+    mail.add_personalization(p)
+
+    sg = SendGridAPIClient()
+    response = sg.client.mail.send.post(request_body=mail.get())
+    
+    return response
