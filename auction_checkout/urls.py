@@ -44,3 +44,10 @@ urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 urlpatterns += [
     path('accounts/', include('django.contrib.auth.urls')),
 ]
+
+# Add mapping for Paypal IPN handler URL
+from django.conf.urls import url, include
+
+urlpatterns = [
+    url(r'^paypal/', include('paypal.standard.ipn.urls')),
+]

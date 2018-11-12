@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'paypal.standard.ipn',
     'bidding.apps.BiddingConfig',
 ]
 
@@ -142,6 +143,9 @@ DATABASES['default'].update(db_from_env)
 # Simplified static file serving.
 # https://warehouse.python.org/project/whitenoise/
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+# Toggle for using Paypal sandbox account for IPN processing
+PAYPAL_TEST = True
 
 
 # Recommended security settings

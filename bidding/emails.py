@@ -1,5 +1,7 @@
 from sendgrid import SendGridAPIClient
 from sendgrid.helpers.mail import *
+from django.urls import reverse
+from paypal.standard.forms import PayPalPaymentsForm
 
 from .models import Bidder, Item
 
@@ -34,10 +36,13 @@ def email_paypal_invoice(bidder):
     name = bidder.__str__()
     inv_total = bidder.amount_owed()
     
+    notify_url = request.build_absolute_uri(reverse('paypal-ipn'))
     item_lines = ''
     paypal_link = 'https://www.sandbox.paypal.com/cgi-bin/webscr?cmd=_cart&upload=1&business=MKNJSUCCMFE8U&lc=US&no_note=1&no_shipping=1&'
-    i = 1
+    paypal_link += 'notify_url=' + notify_url + '&'
+    paypal_link += 'invoice=' + bidder.id + '&'
     
+    i = 1
     for item in Item.objects.all():
         if item.bidder == bidder:
             item_lines += '<tr><td>' + item.name + '</td><td>' + str(item.bid_amount) + '</td></tr>'

@@ -2,6 +2,7 @@ from django.urls import path
 from . import views
 
 
+
 urlpatterns = [
     path('', views.summary, {'sort': 'by-id'}, name='summary'),
     path('?byname', views.summary, {'sort': 'by-name'}, name='summary-byname'),
@@ -12,4 +13,5 @@ urlpatterns = [
     path('invoice/<int:pk>/payment-received', views.payment_received, name='payment-received'),
     path('invoice/<int:pk>/print', views.print_invoice, name='print-invoice'),
     path('packing-list', views.packing_list, name='packing-list'),
+    path('paypal-ipn-listener', views.packing_list, name='packing-list'),
 ]
