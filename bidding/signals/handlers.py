@@ -20,7 +20,7 @@ def update_payment_status(sender, **kwargs):
             return
         
         bidder = Bidder.objects.get(id=int(sender.invoice))
-        payment_proc_debug('check invoice number', str(sender.invoice))
+        payment_proc_debug('check invoice number', str(Bidder.objects.get(id=sender.invoice)))
         
         if int(sender.mc_gross) != bidder.amount_owed:
             #not a valid payment - amounts do not match
