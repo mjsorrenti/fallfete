@@ -10,6 +10,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 #from django.views import generic
 from bidding.models import Bidder, Item
 from bidding.forms import EmailInvoiceForm
+from bidding.emails import *
 
 # Create your views here.
 
@@ -28,13 +29,13 @@ def summary(request, sort):
     
     return render(request, 'summary.html', context={'bidders':bidders, 'sort':sort, 'total':total_amt})
 
-@login_required
-def summary_byname(request):
-    """View function for the invoicing summary page"""
-    
-    bidders = Bidder.objects.all().order_by('last_name')
-    
-    return render(request, 'summary_byname.html', context={'bidders':bidders,})
+#@login_required
+#def summary_byname(request):
+#    """View function for the invoicing summary page"""
+#    
+#    bidders = Bidder.objects.all().order_by('last_name')
+#    
+#    return render(request, 'summary_byname.html', context={'bidders':bidders,})
 
 @login_required
 def bidder_detail(request, pk):
@@ -45,7 +46,11 @@ def bidder_detail(request, pk):
         email_sent = False
         
         if email_invoice_form.is_valid():
-            email_sent = True
+            send = email_standard_invoice(bidder,email_invoice_form.cleaned_data['email'])
+            if send.status_code == 202:
+                email_sent = 'Success'
+            else:
+                email_sent = 'Fail'
         
         return render(request, 'bidding/bidder_detail.html', context={'bidder':bidder, 'email_form':email_invoice_form, 'email_sent':email_sent})
     

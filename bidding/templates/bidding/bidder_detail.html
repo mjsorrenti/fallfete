@@ -4,6 +4,12 @@
 
 {% block content %}
 <main id="invoice">
+    
+{% if email_sent == 'Success' %}
+    <p class="success">Email sent!</p>
+{% elif email_sent == 'Fail' %}
+    <p class="fail">There was a problem sending the email.</p>
+{% endif %}
 
 <h2>{{ bidder }}</h2>
 
@@ -58,9 +64,6 @@
         
             <li><a href="{{ bidder.get_print_url }}" class="button" target="_blank">Print Invoice</a></li>
     </ul>
-        {% if email_sent %}
-            <p>Email sent!</p>
-        {% endif %}
         
     {% else %}
     <ul>
