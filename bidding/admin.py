@@ -14,7 +14,7 @@ class BidderAdmin(admin.ModelAdmin):
     actions = ['email_paypal_invoices',]
     
     def email_paypal_invoices(self, request, queryset):
-        recipients = queryset.filter(mobile_checkout=True)
+        recipients = queryset.filter(mobile_checkout=True).filter(payment_complete=False)
         successful_emails = 0
         failed_emails = 0
         

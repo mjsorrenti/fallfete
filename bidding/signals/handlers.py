@@ -8,11 +8,11 @@ from bidding.emails import *
 def update_payment_status(sender, **kwargs):
     """Do things here upon a valid IPN message received"""
     
-    payment_proc_debug('none yet','The receiver is active. payment_status:' + sender.payment_status)
+    #payment_proc_debug('none yet','The receiver is active. payment_status:' + sender.payment_status)
     
     if sender.payment_status == ST_PP_COMPLETED:
         
-        payment_proc_debug('none yet', 'Payment status checks out as complete.')
+        #payment_proc_debug('none yet', 'Payment status checks out as complete.')
         
         if sender.receiver_email != 'mjsorrenti-facilitator@gmail.com':
             #not a valid message
@@ -20,11 +20,11 @@ def update_payment_status(sender, **kwargs):
             return
         
         bidder = Bidder.objects.get(id=sender.invoice)
-        payment_proc_debug('check invoice number', str(bidder.amount_owed()) + ' ? ' + str(sender.mc_gross))
+        #payment_proc_debug('check invoice number', str(bidder.amount_owed()) + ' ? ' + str(sender.mc_gross))
         
         if sender.mc_gross != bidder.amount_owed():
             #not a valid payment - amounts do not match
-            payment_proc_debug('test', 'Amount received (' + str(sender.mc_gross) + ') didn\'t match amount owed (' + str(bidder.amount_owed()) + ')')
+            payment_proc_debug(bidder.last_name, 'Amount received (' + str(sender.mc_gross) + ') didn\'t match amount owed (' + str(bidder.amount_owed()) + ')')
             return
         
         if bidder.payment_complete == True:
