@@ -21,7 +21,7 @@ def show_me_the_money(sender, **kwargs):
         
         if bidder.payment_complete == True:
             #may be a duplicate payment
-            payment_proc_debug(bidder, 'This may be a duplicate payment.'
+            payment_proc_debug(bidder, 'This may be a duplicate payment.')
             return
         
         bidder.payment_complete = True
