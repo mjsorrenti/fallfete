@@ -24,7 +24,7 @@ def update_payment_status(sender, **kwargs):
         
         if sender.mc_gross != bidder.amount_owed():
             #not a valid payment - amounts do not match
-            payment_proc_debug('test', 'Amount received \(' + str(sender.mc_gross) + '\) didn\'t match amount owed \(' + str(bidder.amount_owed()) + '\)')
+            payment_proc_debug('test', 'Amount received (' + str(sender.mc_gross) + ') didn\'t match amount owed (' + str(bidder.amount_owed()) + ')')
             return
         
         if bidder.payment_complete == True:
@@ -33,6 +33,7 @@ def update_payment_status(sender, **kwargs):
             return
         
         bidder.payment_complete = True
+        bidder.save()
 
 @receiver(invalid_ipn_received)
 def do_not_show_me_the_money(sender, **kwargs):
