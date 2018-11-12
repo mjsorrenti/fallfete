@@ -16,7 +16,7 @@ def update_payment_status(sender, **kwargs):
         
         if sender.receiver_email != 'mjsorrenti-facilitator@gmail.com':
             #not a valid message
-            payment_proc_debug('none','Receiver emails didn\'t match')
+            payment_proc_debug('none','Receiver emails didn\'t match:' + sender.receiver_email)
             return
         
         bidder = Bidder.objects.get(id=sender.invoice)
