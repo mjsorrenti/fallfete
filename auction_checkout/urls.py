@@ -48,6 +48,6 @@ urlpatterns += [
 # Add mapping for Paypal IPN handler URL
 from django.conf.urls import url, include
 
-urlpatterns = [
+urlpatterns += [
     url(r'^paypal/', include('paypal.standard.ipn.urls')),
 ]
