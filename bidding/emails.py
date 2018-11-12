@@ -1,6 +1,7 @@
 from sendgrid import SendGridAPIClient
 from sendgrid.helpers.mail import *
 from django.urls import reverse
+from django.conf import settings
 from paypal.standard.forms import PayPalPaymentsForm
 
 from .models import Bidder, Item
