@@ -5,4 +5,4 @@ class BiddingConfig(AppConfig):
     name = 'bidding'
     
     def ready(self):
-        import bidding.signals
+        import bidding.signals.handlers

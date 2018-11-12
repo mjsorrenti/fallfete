@@ -15,3 +15,10 @@ urlpatterns = [
     path('packing-list', views.packing_list, name='packing-list'),
     path('paypal-ipn-listener', views.packing_list, name='packing-list'),
 ]
+
+# Add mapping for Paypal IPN handler URL
+from django.conf.urls import url, include
+
+urlpatterns += [
+    url(r'^paypal/', include('paypal.standard.ipn.urls')),
+]
