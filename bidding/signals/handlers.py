@@ -20,15 +20,16 @@ def update_payment_status(sender, **kwargs):
             return
         
         bidder = Bidder.objects.get(id=sender.invoice)
+        payment_proc_debug('check invoice number', str(sender.invoice))
         
         if int(sender.mc_gross) != bidder.amount_owed:
             #not a valid payment - amounts do not match
-            payment_proc_debug(bidder, 'Amount received \(' + int(sender.mc_gross) + '\) didn\'t match amount owed \(' + bidder.amount_owed + '\)')
+            payment_proc_debug('test', 'Amount received \(' + int(sender.mc_gross) + '\) didn\'t match amount owed \(') # + bidder.amount_owed + '\)')
             return
         
         if bidder.payment_complete == True:
             #may be a duplicate payment
-            payment_proc_debug(bidder, 'This may be a duplicate payment.')
+            payment_proc_debug(bidder.last_name, 'This may be a duplicate payment.')
             return
         
         bidder.payment_complete = True
