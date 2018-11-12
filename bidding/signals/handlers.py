@@ -6,7 +6,13 @@ from bidding.models import Bidder
 @receiver(valid_ipn_received)
 def show_me_the_money(sender, **kwargs):
     """Do things here upon a valid IPN message received"""
+    
+    payment_proc_debug('none yet','The receiver is active. payment_status:' + sender.payment_status)
+    
     if sender.payment_status == ST_PP_COMPLETED:
+        
+        payment_proc_debug('none yet', 'Payment status checks out as complete.')
+        
         if sender.receiver_email != 'mjsorrenti-facilitator@gmail.com':
             #not a valid message
             payment_proc_debug('none','Receiver emails didn\'t match')
