@@ -37,7 +37,8 @@ def email_paypal_invoice(bidder):
     name = bidder.__str__()
     inv_total = bidder.amount_owed()
     
-    notify_url = settings.DEFAULT_DOMAIN + reverse('paypal-ipn')
+    #notify_url = settings.DEFAULT_DOMAIN + reverse('paypal-ipn')
+    notify_url = 'https%3a%2f%2fbpsfallfete2018%2eherokuapp%2ecom%2fpaypal%2f'
     item_lines = ''
     paypal_link = 'https://www.sandbox.paypal.com/cgi-bin/webscr?cmd=_cart&upload=1&business=MKNJSUCCMFE8U&lc=US&no_note=1&no_shipping=1&'
     paypal_link += 'notify_url=' + notify_url + '&'
