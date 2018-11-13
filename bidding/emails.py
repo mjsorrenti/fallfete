@@ -37,8 +37,8 @@ def email_paypal_invoice(bidder):
     name = bidder.__str__()
     inv_total = bidder.amount_owed()
     
-    merchant_id_production = AAAAA
-    merchant_id_test = MKNJSUCCMFE8U
+    merchant_id_production = 'AAAAA'
+    merchant_id_test = 'MKNJSUCCMFE8U' #Mike Sorrenti's sandbox account
     merchant_id = merchant_id_test
     
     #notify_url = settings.DEFAULT_DOMAIN + reverse('paypal-ipn')
