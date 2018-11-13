@@ -13,7 +13,7 @@ def email_standard_invoice(bidder, email):
     item_lines = ''
     for item in Item.objects.all():
         if item.bidder == bidder:
-            item_lines += '<tr><td>' + item.name + '</td><td>' + str(item.bid_amount) + '</td></tr>'
+            item_lines += '<tr><td>' + item.name + '</td><td>$' + str(item.bid_amount) + '</td></tr>'
     
     mail = Mail()
     mail.from_email = Email('Brown Play School <claudine@brownplayschool.org>')
@@ -53,7 +53,7 @@ def email_paypal_invoice(bidder):
     i = 1
     for item in Item.objects.all():
         if item.bidder == bidder:
-            item_lines += '<tr><td>' + item.name + '</td><td>' + str(item.bid_amount) + '</td></tr>'
+            item_lines += '<tr><td>' + item.name + '</td><td>$' + str(item.bid_amount) + '</td></tr>'
             paypal_link += 'item_name_' + str(i) + '=' + item.name + '&amount_' + str(i) + '=' + str(item.bid_amount) + '&'
             i += 1
     
