@@ -48,7 +48,7 @@ def email_paypal_invoice(bidder):
     
     paypal_link = 'https://www.sandbox.paypal.com/cgi-bin/webscr?cmd=_cart&business='
     paypal_link += merchant_id
-    paypal+link += '&lc=US&'
+    paypal_link += '&lc=US&'
     
     i = 1
     for item in Item.objects.all():
