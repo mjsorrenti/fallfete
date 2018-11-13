@@ -80,6 +80,23 @@ def email_paypal_invoice(bidder):
     
     return response
 
+def payment_dupe_warning(bidder, txn_id):
+    mail = Mail()
+    mail.from_email = Email('Brown Play School <claudine@brownplayschool.org>')
+    mail.template_id = 'd-fcae18f2c2f14356bb3a654701cc656e'
+    p = Personalization()
+    p.add_to(Email('mjsorrenti@gmail.com'))
+    p.dynamic_template_data = {
+        'bidder': bidder,
+        'txn': txn_id,
+    }
+    mail.add_personalization(p)
+
+    sg = SendGridAPIClient()
+    response = sg.client.mail.send.post(request_body=mail.get())
+    
+    return response
+
 def payment_proc_debug(bidder,message):
     mail = Mail()
     mail.from_email = Email('Brown Play School <claudine@brownplayschool.org>')

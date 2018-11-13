@@ -29,10 +29,11 @@ def update_payment_status(sender, **kwargs):
         
         if bidder.payment_complete == True:
             #may be a duplicate payment
-            payment_proc_debug(bidder.last_name, 'This may be a duplicate payment.')
+            payment_dupe_warning(bidder, sender.txn_id)
             return
         
         bidder.payment_complete = True
+        bidder.payment_txn = 'PayPal: ' + sender.txn_id
         bidder.save()
 
 @receiver(invalid_ipn_received)
