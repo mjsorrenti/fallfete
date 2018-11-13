@@ -142,6 +142,19 @@ table th i {
     margin-left: 1rem;
 }
 
+#summary form {
+    float: left;
+}
+
+#summary form label {
+    margin-right: 0.2rem;
+}
+
+#summary form.search_active #id_name {
+    border: solid 2px green;
+    background-color: rgba(0,220,0,0.1);
+}
+
 #summary ul {
     list-style: none;
     text-align: right;

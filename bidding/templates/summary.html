@@ -5,6 +5,15 @@
 {% block content %}
 <main id="summary">
 
+    <form action="" method="post" {% if search_active %}class="search_active"{% endif %}>
+        {% csrf_token %}
+        {{ search_form.as_table }}
+        <input type="submit" value="Search">
+        {% if search_active %}
+        <a href="{% url 'summary' %}" class="button">Show All</a>
+        {% endif %}
+    </form>
+    
 <ul>
     <li><a href="{% url 'bidder-create' %}" class="button"><i class="fas fa-plus"></i> New Bidder</a></li>
     <li><a href="{% url 'packing-list' %}" class="button">Packing List</a></li>
@@ -46,7 +55,7 @@
     {% endfor %}
 </tbody>
 </table>
-    {% if total %}
+    {% if total and search_active == False %}
     <p>Total Auction Revenue: ${{ total }}</p>
     {% endif %}
 </main>

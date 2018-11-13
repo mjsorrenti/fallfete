@@ -29,7 +29,7 @@ def update_payment_status(sender, **kwargs):
         
         if bidder.payment_complete == True:
             #may be a duplicate payment
-            payment_dupe_warning(bidder.last_name, str(sender.txn_id))
+            payment_dupe_warning(bidder.first_name + ' ' + bidder.last_name, str(sender.txn_id))
             return
         
         bidder.payment_complete = True

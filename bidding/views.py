@@ -7,9 +7,10 @@ from django.urls import reverse_lazy
 from django.views.generic.edit import CreateView, UpdateView
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.db.models import Q
 #from django.views import generic
 from bidding.models import Bidder, Item
-from bidding.forms import EmailInvoiceForm
+from bidding.forms import EmailInvoiceForm, BidderSearchForm
 from bidding.emails import *
 
 # Create your views here.
@@ -18,24 +19,28 @@ from bidding.emails import *
 def summary(request, sort):
     """View function for the invoicing summary page"""
     total_amt = 0
-    
-    if sort == 'by-name':
-        bidders = Bidder.objects.all().order_by('last_name')
-    else:
-        bidders = Bidder.objects.all()
-        
-    for bidder in bidders:
+    for bidder in Bidder.objects.all():
         total_amt += bidder.amount_owed()
+    search_active = False
+        
+    if request.method == 'POST':
+        search_form = BidderSearchForm(request.POST)
+        if search_form.is_valid():
+            bidders = Bidder.objects.filter(Q(first_name__icontains=search_form.cleaned_data['name']) | Q(last_name__icontains=search_form.cleaned_data['name']))
+        search_active = True
     
-    return render(request, 'summary.html', context={'bidders':bidders, 'sort':sort, 'total':total_amt})
+    else:
+        search_form = BidderSearchForm()
+        
+        if sort == 'by-name':
+            bidders = Bidder.objects.all().order_by('last_name')
+        else:
+            bidders = Bidder.objects.all()
+        
+    
+    
+    return render(request, 'summary.html', context={'bidders':bidders, 'sort':sort, 'total':total_amt, 'search_form':search_form, 'search_active':search_active})
 
-#@login_required
-#def summary_byname(request):
-#    """View function for the invoicing summary page"""
-#    
-#    bidders = Bidder.objects.all().order_by('last_name')
-#    
-#    return render(request, 'summary_byname.html', context={'bidders':bidders,})
 
 @login_required
 def bidder_detail(request, pk):
