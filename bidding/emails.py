@@ -37,12 +37,18 @@ def email_paypal_invoice(bidder):
     name = bidder.__str__()
     inv_total = bidder.amount_owed()
     
+    merchant_id_production = AAAAA
+    merchant_id_test = MKNJSUCCMFE8U
+    merchant_id = merchant_id_test
+    
     #notify_url = settings.DEFAULT_DOMAIN + reverse('paypal-ipn')
     notify_url = 'https%3a%2f%2fbpsfallfete2018%2eherokuapp%2ecom%2fpaypal%2f'
+    
     item_lines = ''
-    paypal_link = 'https://www.sandbox.paypal.com/cgi-bin/webscr?cmd=_cart&upload=1&business=MKNJSUCCMFE8U&lc=US&no_note=1&no_shipping=1&'
-    paypal_link += 'notify_url=' + notify_url + '&'
-    paypal_link += 'invoice=' + str(bidder.id) + '&'
+    
+    paypal_link = 'https://www.sandbox.paypal.com/cgi-bin/webscr?cmd=_cart&business='
+    paypal_link += merchant_id
+    paypal+link += '&lc=US&'
     
     i = 1
     for item in Item.objects.all():
@@ -51,7 +57,10 @@ def email_paypal_invoice(bidder):
             paypal_link += 'item_name_' + str(i) + '=' + item.name + '&amount_' + str(i) + '=' + str(item.bid_amount) + '&'
             i += 1
     
-    paypal_link += 'email=' + bidder.email_address + '&first_name=' + bidder.first_name + '&last_name=' + bidder.last_name
+    paypal_link += 'currency_code=USD&no_note=1&no_shipping=1&tax_rate=0%2e000&shipping=0%2e00&upload=1&'
+    paypal_link += 'notify_url=' + notify_url + '&'
+    paypal_link += 'email=' + bidder.email_address + '&first_name=' + bidder.first_name + '&last_name=' + bidder.last_name + '&custom=' + str(bidder.id)
+    
     
     mail = Mail()
     mail.from_email = Email('Brown Play School <claudine@brownplayschool.org>')
