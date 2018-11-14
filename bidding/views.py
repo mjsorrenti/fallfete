@@ -70,7 +70,7 @@ def payment_received(request, pk):
         bidder = get_object_or_404(Bidder, pk=pk)
     
         bidder.payment_complete = True
-        bidder.payment_txn = 'manual_' + str(request.user.get_username())
+        bidder.payment_txn = str(request.user.get_username()) + ' - ' + str(datetime.datetime.now())
         bidder.save()
     
     return HttpResponseRedirect(bidder.get_invoice_url())

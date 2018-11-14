@@ -336,6 +336,20 @@ h3.paid {
     
 }
 
+@media screen and (max-width: 800px) {
+    #packing-list section {
+        padding: 0.2rem;
+    }
+    
+    #packing-list section h3 {
+        position: relative;
+    }
+    
+    #packing-list #return-link {
+        position: relative;
+    }
+}
+
 #packing-list section > p {
     font-weight: bold;
 }
