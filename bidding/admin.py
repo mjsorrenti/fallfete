@@ -52,7 +52,7 @@ class BatchProcessingAdmin(admin.ModelAdmin):
     
     def read_in_items(self, request, queryset):
         for selection in queryset:
-            if selection.type == 'Items':
+            if selection.type == 'I':
                 with open(selection.file.path) as f:
                     csv_reader = csv.reader(f)
                     count = 0
@@ -69,7 +69,7 @@ class BatchProcessingAdmin(admin.ModelAdmin):
     
     def read_in_bidders(self, request, queryset):
         for selection in queryset:
-            if selection.type == 'Bidders':
+            if selection.type == 'B':
                 with open(selection.file.path) as f:
                     csv_reader = csv.reader(f)
                     count = 0
