@@ -1,6 +1,7 @@
-from django.contrib import admin
-from bidding.models import Bidder, Item
+from django.contrib import admin, messages
+from bidding.models import Bidder, Item, BatchProcessing
 from bidding.emails import *
+import csv
 
 @admin.register(Bidder)
 class BidderAdmin(admin.ModelAdmin):
@@ -40,3 +41,45 @@ class ItemAdmin(admin.ModelAdmin):
     raw_id_fields = ('bidder',)
     search_fields = ['id', 'name', 'bidder']
     fields = ('id', 'name')
+
+    
+@admin.register(BatchProcessing)
+class BatchProcessingAdmin(admin.ModelAdmin):
+    list_display = ('name', 'file', 'type')
+    list_display_links = ('name',)
+    
+    actions = ['read_in_items', 'read_in_bidders']
+    
+    def read_in_items(self, request, queryset):
+        for selection in queryset:
+            if selection.type == 'Items':
+                with open(selection.file.path) as f:
+                    csv_reader = csv.reader(f)
+                    count = 0
+
+                    for row in csv_reader:
+                        new_item = Item(id=row[0], name=row[1])
+                        new_item.save()
+                        count += 1
+
+                    self.message_user(request, '%s new models created' % count)
+                    
+            else:
+                self.message_user(request, '%s is not an Items file' % selection.name, messages.WARNING)
+    
+    def read_in_bidders(self, request, queryset):
+        for selection in queryset:
+            if selection.type == 'Bidders':
+                with open(selection.file.path) as f:
+                    csv_reader = csv.reader(f)
+                    count = 0
+
+                    for row in csv_reader:
+                        new_bidder = Bidder(first_name=row[0], last_name=row[1], email_address=row[2], mobile_checkout=row[3])
+                        new_item.save()
+                        count += 1
+
+                    self.message_user(request, '%s new bidders created' % count)
+                    
+            else:
+                self.message_user(request, '%s is not an Bidders file' % selection.name, messages.WARNING)
