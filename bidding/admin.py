@@ -75,7 +75,11 @@ class BatchProcessingAdmin(admin.ModelAdmin):
                     count = 0
 
                     for row in csv_reader:
-                        new_bidder = Bidder(first_name=row[0], last_name=row[1], email_address=row[2], mobile_checkout=row[3])
+                        new_bidder = Bidder(first_name=row[0], last_name=row[1], email_address=row[2])
+                        if row[3] == '':
+                            new_bidder.mobile_checkout = False
+                        else:
+                            new_bidder.mobile_checkout = True
                         new_bidder.save()
                         count += 1
 
