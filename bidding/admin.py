@@ -76,7 +76,7 @@ class BatchProcessingAdmin(admin.ModelAdmin):
 
                     for row in csv_reader:
                         new_bidder = Bidder(first_name=row[0], last_name=row[1], email_address=row[2], mobile_checkout=row[3])
-                        new_item.save()
+                        new_bidder.save()
                         count += 1
 
                     self.message_user(request, '%s new bidders created' % count)
