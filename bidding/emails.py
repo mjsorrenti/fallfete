@@ -37,16 +37,17 @@ def email_paypal_invoice(bidder):
     name = bidder.__str__()
     inv_total = bidder.amount_owed()
     
-    merchant_id_production = 'AAAAA'
-    merchant_id_test = 'MKNJSUCCMFE8U' #Mike Sorrenti's sandbox account
-    merchant_id = merchant_id_test
-    
+    merchant_id = 'N4V8E3CXGA3DL' #Brown Play School merchant account
+    #merchant_id = 'MKNJSUCCMFE8U' #Mike Sorrenti's sandbox account
+        
     #notify_url = settings.DEFAULT_DOMAIN + reverse('paypal-ipn')
     notify_url = 'https%3a%2f%2fbpsfallfete2018%2eherokuapp%2ecom%2fpaypal%2f'
+    logo_url = 'http%3a%2f%2fwww%2ebrownplayschool%2eorg%2fwp-content%2fuploads%2f2017%2f10%2fBPS-e1508182275191%2epng'
     
     item_lines = ''
     
-    paypal_link = 'https://www.sandbox.paypal.com/cgi-bin/webscr?cmd=_cart&business='
+    paypal_link = 'https://www.paypal.com/cgi-bin/webscr?cmd=_cart&business=' # Production link
+    # paypal_link = 'https://www.sandbox.paypal.com/cgi-bin/webscr?cmd=_cart&business=' # Sandbox link
     paypal_link += merchant_id
     paypal_link += '&lc=US&'
     
@@ -58,7 +59,7 @@ def email_paypal_invoice(bidder):
             i += 1
     
     paypal_link += 'currency_code=USD&no_note=1&no_shipping=1&tax_rate=0%2e000&shipping=0%2e00&upload=1&'
-    paypal_link += 'notify_url=' + notify_url + '&'
+    paypal_link += 'notify_url=' + notify_url + '&image_url=' + logo_url + '&'
     paypal_link += 'email=' + bidder.email_address + '&first_name=' + bidder.first_name + '&last_name=' + bidder.last_name + '&custom=' + str(bidder.id)
     
     

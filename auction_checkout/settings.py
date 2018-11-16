@@ -149,7 +149,7 @@ DATABASES['default'].update(db_from_env)
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Toggle for using Paypal sandbox account for IPN processing
-PAYPAL_TEST = True
+# PAYPAL_TEST = True
 
 
 # Recommended security settings
