@@ -40,9 +40,9 @@ def email_paypal_invoice(bidder):
     merchant_id = 'N4V8E3CXGA3DL' #Brown Play School merchant account
     #merchant_id = 'MKNJSUCCMFE8U' #Mike Sorrenti's sandbox account
         
-    #notify_url = settings.DEFAULT_DOMAIN + reverse('paypal-ipn')
-    notify_url = 'https%3a%2f%2fbpsfallfete2018%2eherokuapp%2ecom%2fpaypal%2f'
-    logo_url = 'http%3a%2f%2fwww%2ebrownplayschool%2eorg%2fwp-content%2fuploads%2f2017%2f10%2fBPS-e1508182275191%2epng'
+    notify_url = settings.DEFAULT_DOMAIN + reverse('paypal-ipn')
+    #notify_url = 'https%3a%2f%2fbpsfallfete2018%2eherokuapp%2ecom%2fpaypal%2f'
+    logo_url = 'https://www.brownplayschool.org/wp-content/uploads/2018/11/BPS-logo-PP.png'
     
     item_lines = ''
     
