@@ -59,6 +59,8 @@ class BatchProcessingAdmin(admin.ModelAdmin):
 
                     for row in csv_reader:
                         new_item = Item(id=row[0], name=row[1])
+                        if row[2]:
+                            new_item.bid_amount = row[2]
                         new_item.save()
                         count += 1
 

@@ -61,5 +61,5 @@ class BatchProcessing(models.Model):
     )
     
     name = models.CharField(max_length=50)
-    file = models.FileField(help_text='Files must be in CSV format. \rItems files should have 2 columns: id, name \rBidders files should have 4 columns: first_name, last_name, email_address, mobile_checkout (for the last column, any value will be interpretted as True; leave the cell blank for False)')
+    file = models.FileField(help_text='Files must be in CSV format. \rItems files should have 2 or 3 columns: id, name, price. \rBidders files should have 4 columns: first_name, last_name, email_address, mobile_checkout (for the last column, any value will be interpretted as True; leave the cell blank for False).')
     type = models.CharField(max_length=10, choices=FILE_TYPES)
