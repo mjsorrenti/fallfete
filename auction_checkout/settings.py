@@ -31,7 +31,7 @@ ALLOWED_HOSTS = [
     'bpsfallfete2018.herokuapp.com',
 ]
 
-DEFAULT_DOMAIN = 'https://bpsfallfete2018.herokuapp.com'
+# DEFAULT_DOMAIN = 'https://bpsfallfete2018.herokuapp.com'
 
 
 # Application definition
