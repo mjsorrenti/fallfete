@@ -14,7 +14,10 @@ def update_payment_status(sender, **kwargs):
         
         #payment_proc_debug('none yet', 'Payment status checks out as complete.')
         
-        if sender.receiver_email != 'mjsorrenti-facilitator@gmail.com':
+        # acct_email = 'mjsorrenti-facilitator@gmail.com' # Mike Sorrenti's sandbox account
+        acct_email = 'cftaylor7@yahoo.com' # Brown Play School account
+        
+        if sender.receiver_email != acct_email:
             #not a valid message
             payment_proc_debug('none','Receiver emails didn\'t match:' + sender.receiver_email)
             return
